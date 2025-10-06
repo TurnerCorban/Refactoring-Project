@@ -1,5 +1,8 @@
 package edu.uca.registration;
 
+import edu.uca.registration.records.Course;
+import edu.uca.registration.records.Student;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -10,7 +13,6 @@ public class Main {
     static List<String> auditLog = new ArrayList<>();
 
     public static void main(String[] args) {
-        seedDemoData();
         println("=== UCA Course Registration (Baseline) ===");
         println("NOTE: This code is intentionally messy. You'll refactor it.");
         menuLoop();
@@ -74,7 +76,7 @@ public class Main {
         String cc = sc.nextLine().trim();
         Course c = courses.get(cc);
         if (c == null) { println("No such course"); return; }
-        if (c.roster.size() >= c.capacity) {
+        if (c.roster.size() >= c.capacity()) {
             c.waitlist.add(sid);
             audit("WAITLIST " + sid + "->" + cc);
         } else {
@@ -110,26 +112,9 @@ public class Main {
     private static void listCourses() {
         println("Courses:");
         for (Course c : courses.values())
-            println(" - " + c.code + " " + c.title + " cap=" + c.capacity + " enrolled=" + c.roster.size());
+            println(" - " + c.code() + " " + c.title() + " cap=" + c.capacity() + " enrolled=" + c.roster.size());
     }
 
-    private static void seedDemoData() {
-        students.put("B001", new Student("B001", "Alice", "alice@uca.edu"));
-        students.put("B002", new Student("B002", "Brian", "brian@uca.edu"));
-        courses.put("CSCI4490", new Course("CSCI4490", "Software Engineering", 2));
-        courses.put("MATH1496", new Course("MATH1496", "Calculus I", 50));
-    }
-
-    static class Student {
-        String id, name, email;
-        Student(String id, String name, String email) { this.id=id; this.name=name; this.email=email; }
-        public String toString() { return id + " " + name + " <" + email + ">"; }
-    }
-    static class Course {
-        String code, title; int capacity;
-        List<String> roster = new ArrayList<>(), waitlist = new ArrayList<>();
-        Course(String code, String title, int capacity) { this.code=code; this.title=title; this.capacity=capacity; }
-    }
 
     private static void print(String s){ System.out.print(s); }
     private static void println(String s){ System.out.println(s); }

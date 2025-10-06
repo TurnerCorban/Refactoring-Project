@@ -1,6 +1,8 @@
 package edu.uca.registration.repo.implementation;
 
 import edu.uca.registration.model.*;
+import edu.uca.registration.records.Course;
+import edu.uca.registration.records.Student;
 import edu.uca.registration.repo.StudentRepository;
 import edu.uca.registration.repo.CourseRepository;
 import edu.uca.registration.repo.EnrollmentRepository;
@@ -47,7 +49,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
 
     @Override
     public Student save(Student student) {
-        dataStore.students.put(student.getBannerId(), student);
+        dataStore.students.put(student.id(), student);
         saveToFile();
         return student;
     }
@@ -82,7 +84,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
 
     @Override
     public Course save(Course course) {
-        dataStore.courses.put(course.getCode(), course);
+        dataStore.courses.put(course.code(), course);
         saveToFile();
         return course;
     }
@@ -228,7 +230,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
                     String[] parts = line.split(",");
                     if (parts.length == 3) {
                         Student student = new Student(parts[0].trim(), parts[1].trim(), parts[2].trim());
-                        dataStore.students.put(student.getBannerId(), student);
+                        dataStore.students.put(student.id(), student);
                     }
                 } catch (Exception e) {
                     System.err.println("Skipping invalid student line: " + line);
@@ -250,7 +252,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
                     String[] parts = line.split(",");
                     if (parts.length >= 3) {
                         Course course = new Course(parts[0].trim(), parts[1].trim(), Integer.parseInt(parts[2].trim()));
-                        dataStore.courses.put(course.getCode(), course);
+                        dataStore.courses.put(course.code(), course);
                     }
                 } catch (Exception e) {
                     System.err.println("Skipping invalid course line: " + line);

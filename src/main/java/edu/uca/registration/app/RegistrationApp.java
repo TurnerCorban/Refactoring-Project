@@ -1,7 +1,7 @@
 package edu.uca.registration.app;
 
 import edu.uca.registration.model.*;
-import edu.uca.registration.repo.*;
+import edu.uca.registration.records.*;
 import edu.uca.registration.repo.implementation.*;
 import edu.uca.registration.service.RegistrationService;
 import edu.uca.registration.utility.Config;
@@ -135,8 +135,8 @@ public class RegistrationApp {
         List<Course> courses = service.listCourses();
         println("Courses (" + courses.size() + "):");
         for (Course c : courses) {
-            int enrolled = service.getEnrollmentRepo().countEnrolledInCourse(c.getCode());
-            int waitlisted = service.getEnrollmentRepo().countWaitlistedInCourse(c.getCode());
+            int enrolled = service.getEnrollmentRepo().countEnrolledInCourse(c.code());
+            int waitlisted = service.getEnrollmentRepo().countWaitlistedInCourse(c.code());
             println(" - " + c + " enrolled=" + enrolled + " waitlisted=" + waitlisted);
         }
     }

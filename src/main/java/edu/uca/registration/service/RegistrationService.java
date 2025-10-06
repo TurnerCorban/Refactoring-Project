@@ -1,6 +1,7 @@
 package edu.uca.registration.service;
 
 import edu.uca.registration.model.*;
+import edu.uca.registration.records.*;
 import edu.uca.registration.repo.StudentRepository;
 import edu.uca.registration.repo.CourseRepository;
 import edu.uca.registration.repo.EnrollmentRepository;
@@ -62,7 +63,7 @@ public class RegistrationService {
 
         int enrolledCount = enrollmentRepo.countEnrolledInCourse(courseCode);
 
-        if (enrolledCount < course.getCapacity()) {
+        if (enrolledCount < course.capacity()) {
             // Enroll directly
             Enrollment enrollment = new Enrollment(studentId, courseCode,
                     Enrollment.Status.ENROLLED, 0);

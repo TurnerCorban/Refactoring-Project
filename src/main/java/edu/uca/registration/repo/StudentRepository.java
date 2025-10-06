@@ -1,6 +1,7 @@
 package edu.uca.registration.repo;
 
-import edu.uca.registration.model.Student;
+import edu.uca.registration.records.Student;
+
 import java.util.List;
 import java.util.Optional;
 
