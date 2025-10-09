@@ -31,7 +31,25 @@
       "code" : "CSCI3385",
       "title" : "Artificial Intelligence",
       "capacity" : 35
+    },
+    "CSCI4315" : {
+      "code" : "CSCI4315",
+      "title" : "OOP",
+      "capacity" : 15
     }
   },
-  "enrollments" : { }
+  "enrollments" : {
+    "B002:CSCI4490" : {
+      "studentId" : "B002",
+      "courseCode" : "CSCI4490",
+      "status" : "ENROLLED",
+      "waitlistPosition" : 0
+    },
+    "B003:CSCI4490" : {
+      "studentId" : "B003",
+      "courseCode" : "CSCI4490",
+      "status" : "ENROLLED",
+      "waitlistPosition" : 0
+    }
+  }
 }

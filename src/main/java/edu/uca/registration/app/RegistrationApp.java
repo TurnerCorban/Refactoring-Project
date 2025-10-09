@@ -191,28 +191,4 @@ public class RegistrationApp {
 
     private void print(String s) { System.out.print(s); }
     private void println(String s) { System.out.println(s); }
-
-    public static void main(String[] args) {
-        // Check for --demo flag in command line arguments
-        boolean demoMode = false;
-        for (String arg : args) {
-            if ("--demo".equals(arg)) {
-                demoMode = true;
-                break;
-            }
-        }
-
-        // Single repository implementation that handles all data
-        JsonDataRepository dataRepo = new JsonDataRepository();
-
-        // But we pass it as separate interfaces to the service
-        RegistrationService service = new RegistrationService(
-                dataRepo, // as StudentRepository
-                dataRepo, // as CourseRepository
-                dataRepo  // as EnrollmentRepository
-        );
-
-        RegistrationApp app = new RegistrationApp(service, demoMode);
-        app.run();
-    }
 }

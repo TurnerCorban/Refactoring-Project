@@ -47,7 +47,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>edu.uca.registration.app.RegistrationApp</mainClass>
+              <mainClass>edu.uca.registration.Main</mainClass>
             </manifest>
           </archive>
         </configuration>

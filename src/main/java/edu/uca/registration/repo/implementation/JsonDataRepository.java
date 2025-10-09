@@ -49,7 +49,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
 
     @Override
     public Student save(Student student) {
-        dataStore.students.put(student.id(), student);
+        dataStore.students.put(student.bannerId(), student);
         saveToFile();
         return student;
     }
@@ -230,7 +230,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
                     String[] parts = line.split(",");
                     if (parts.length == 3) {
                         Student student = new Student(parts[0].trim(), parts[1].trim(), parts[2].trim());
-                        dataStore.students.put(student.id(), student);
+                        dataStore.students.put(student.bannerId(), student);
                     }
                 } catch (Exception e) {
                     System.err.println("Skipping invalid student line: " + line);
@@ -264,8 +264,6 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
     }
 
     private void importEnrollmentsFromCsv() {
-        // This would need to reconstruct enrollments from the original logic
-        // For now, we'll start with fresh enrollments
         System.out.println("Note: Enrollment data starts fresh. Re-enroll students as needed.");
     }
 }
