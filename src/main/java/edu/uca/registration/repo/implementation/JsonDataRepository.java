@@ -1,7 +1,7 @@
 package edu.uca.registration.repo.implementation;
 
-import edu.uca.registration.model.*;
 import edu.uca.registration.records.Course;
+import edu.uca.registration.records.Enrollment;
 import edu.uca.registration.records.Student;
 import edu.uca.registration.repo.StudentRepository;
 import edu.uca.registration.repo.CourseRepository;
@@ -58,7 +58,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
     public boolean deleteStudent(String bannerId) {
         // Also remove related enrollments
         dataStore.enrollments.entrySet().removeIf(entry ->
-                entry.getValue().getStudentId().equals(bannerId));
+                entry.getValue().studentId().equals(bannerId));
 
         boolean removed = dataStore.students.remove(bannerId) != null;
         if (removed) saveToFile();
@@ -93,7 +93,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
     public boolean deleteCourse(String code) {
         // Also remove related enrollments
         dataStore.enrollments.entrySet().removeIf(entry ->
-                entry.getValue().getCourseCode().equals(code));
+                entry.getValue().courseCode().equals(code));
 
         boolean removed = dataStore.courses.remove(code) != null;
         if (removed) saveToFile();
@@ -111,7 +111,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
     public List<Enrollment> findByStudentId(String studentId) {
         List<Enrollment> result = new ArrayList<>();
         for (Enrollment enrollment : dataStore.enrollments.values()) {
-            if (enrollment.getStudentId().equals(studentId)) {
+            if (enrollment.studentId().equals(studentId)) {
                 result.add(enrollment);
             }
         }
@@ -122,7 +122,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
     public List<Enrollment> findByCourseCode(String courseCode) {
         List<Enrollment> result = new ArrayList<>();
         for (Enrollment enrollment : dataStore.enrollments.values()) {
-            if (enrollment.getCourseCode().equals(courseCode)) {
+            if (enrollment.courseCode().equals(courseCode)) {
                 result.add(enrollment);
             }
         }
@@ -133,20 +133,20 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
     public List<Enrollment> findWaitlistedByCourse(String courseCode) {
         List<Enrollment> result = new ArrayList<>();
         for (Enrollment enrollment : dataStore.enrollments.values()) {
-            if (enrollment.getCourseCode().equals(courseCode) &&
-                    enrollment.getStatus() == Enrollment.Status.WAITLISTED) {
+            if (enrollment.courseCode().equals(courseCode) &&
+                    enrollment.status() == Enrollment.Status.WAITLISTED) {
                 result.add(enrollment);
             }
         }
         // Sort by waitlist position
-        result.sort(Comparator.comparingInt(Enrollment::getWaitlistPosition));
+        result.sort(Comparator.comparingInt(Enrollment::waitlistPosition));
         return result;
     }
 
     @Override
     public Enrollment save(Enrollment enrollment) {
         dataStore.enrollments.put(
-                getEnrollmentKey(enrollment.getStudentId(), enrollment.getCourseCode()),
+                getEnrollmentKey(enrollment.studentId(), enrollment.courseCode()),
                 enrollment
         );
         saveToFile();
@@ -161,18 +161,18 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
     }
 
     @Override
-    public int countEnrolledInCourse(String courseCode) {
+    public int numEnrolledInCourse(String courseCode) {
         return (int) dataStore.enrollments.values().stream()
-                .filter(e -> e.getCourseCode().equals(courseCode) &&
-                        e.getStatus() == Enrollment.Status.ENROLLED)
+                .filter(e -> e.courseCode().equals(courseCode) &&
+                        e.status() == Enrollment.Status.ENROLLED)
                 .count();
     }
 
     @Override
-    public int countWaitlistedInCourse(String courseCode) {
+    public int numWaitlistedInCourse(String courseCode) {
         return (int) dataStore.enrollments.values().stream()
-                .filter(e -> e.getCourseCode().equals(courseCode) &&
-                        e.getStatus() == Enrollment.Status.WAITLISTED)
+                .filter(e -> e.courseCode().equals(courseCode) &&
+                        e.status() == Enrollment.Status.WAITLISTED)
                 .count();
     }
 
@@ -182,6 +182,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
         File file = new File(filePath);
         if (!file.exists()) {
             dataStore = new DataStore();
+            System.out.println("file not found, creating new file");
             return;
         }
 

@@ -1,18 +1,22 @@
 package edu.uca.registration.app;
 
-import edu.uca.registration.model.*;
 import edu.uca.registration.records.*;
-import edu.uca.registration.repo.implementation.*;
 import edu.uca.registration.service.RegistrationService;
 import edu.uca.registration.utility.Config;
 
 import java.util.List;
 import java.util.Scanner;
 
+/*
+UI Handler
+*/
+
 public class RegistrationApp {
     private final RegistrationService service;
     private final Scanner scanner;
     private boolean demoMode;
+
+
 
     public RegistrationApp(RegistrationService service, boolean demoMode) {
         this.service = service;
@@ -101,8 +105,8 @@ public class RegistrationApp {
             String cc = scanner.nextLine().trim();
 
             Enrollment enrollment = service.enrollStudent(sid, cc);
-            String status = enrollment.getStatus() == Enrollment.Status.ENROLLED ?
-                    "enrolled" : "waitlisted (position: " + enrollment.getWaitlistPosition() + ")";
+            String status = enrollment.status() == Enrollment.Status.ENROLLED ?
+                    "enrolled" : "waitlisted (position: " + enrollment.waitlistPosition() + ")";
             println("Student " + status + " in course");
         } catch (Exception e) {
             println("Error: " + e.getMessage());
@@ -135,8 +139,8 @@ public class RegistrationApp {
         List<Course> courses = service.listCourses();
         println("Courses (" + courses.size() + "):");
         for (Course c : courses) {
-            int enrolled = service.getEnrollmentRepo().countEnrolledInCourse(c.code());
-            int waitlisted = service.getEnrollmentRepo().countWaitlistedInCourse(c.code());
+            int enrolled = service.getEnrollmentRepo().numEnrolledInCourse(c.code());
+            int waitlisted = service.getEnrollmentRepo().numWaitlistedInCourse(c.code());
             println(" - " + c + " enrolled=" + enrolled + " waitlisted=" + waitlisted);
         }
     }
@@ -151,9 +155,9 @@ public class RegistrationApp {
             println(" - No enrollments found");
         } else {
             for (Enrollment e : enrollments) {
-                String status = e.getStatus() == Enrollment.Status.ENROLLED ?
-                        "ENROLLED" : "WAITLISTED (position: " + e.getWaitlistPosition() + ")";
-                println(" - " + e.getCourseCode() + ": " + status);
+                String status = e.status() == Enrollment.Status.ENROLLED ?
+                        "ENROLLED" : "WAITLISTED (position: " + e.waitlistPosition() + ")";
+                println(" - " + e.courseCode() + ": " + status);
             }
         }
     }

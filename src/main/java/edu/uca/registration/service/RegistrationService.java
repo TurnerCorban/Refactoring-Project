@@ -1,6 +1,5 @@
 package edu.uca.registration.service;
 
-import edu.uca.registration.model.*;
 import edu.uca.registration.records.*;
 import edu.uca.registration.repo.StudentRepository;
 import edu.uca.registration.repo.CourseRepository;
@@ -56,12 +55,12 @@ public class RegistrationService {
         // Check if already enrolled or waitlisted
         List<Enrollment> existing = enrollmentRepo.findByStudentId(studentId);
         for (Enrollment e : existing) {
-            if (e.getCourseCode().equals(courseCode)) {
+            if (e.courseCode().equals(courseCode)) {
                 throw new IllegalArgumentException("Student already enrolled/waitlisted in this course");
             }
         }
 
-        int enrolledCount = enrollmentRepo.countEnrolledInCourse(courseCode);
+        int enrolledCount = enrollmentRepo.numEnrolledInCourse(courseCode);
 
         if (enrolledCount < course.capacity()) {
             // Enroll directly
@@ -70,7 +69,7 @@ public class RegistrationService {
             return enrollmentRepo.save(enrollment);
         } else {
             // Add to waitlist
-            int waitlistPosition = enrollmentRepo.countWaitlistedInCourse(courseCode) + 1;
+            int waitlistPosition = enrollmentRepo.numWaitlistedInCourse(courseCode) + 1;
             Enrollment enrollment = new Enrollment(studentId, courseCode,
                     Enrollment.Status.WAITLISTED, waitlistPosition);
             return enrollmentRepo.save(enrollment);
@@ -87,14 +86,14 @@ public class RegistrationService {
         List<Enrollment> waitlist = enrollmentRepo.findWaitlistedByCourse(courseCode);
         if (!waitlist.isEmpty()) {
             Enrollment toPromote = waitlist.get(0);
-            Enrollment promoted = new Enrollment(toPromote.getStudentId(),
-                    toPromote.getCourseCode(), Enrollment.Status.ENROLLED, 0);
+            Enrollment promoted = new Enrollment(toPromote.studentId(),
+                    toPromote.courseCode(), Enrollment.Status.ENROLLED, 0);
             enrollmentRepo.save(promoted);
 
             // Recalculate waitlist positions for remaining students
             for (int i = 1; i < waitlist.size(); i++) {
                 Enrollment w = waitlist.get(i);
-                Enrollment updated = new Enrollment(w.getStudentId(), w.getCourseCode(),
+                Enrollment updated = new Enrollment(w.studentId(), w.courseCode(),
                         Enrollment.Status.WAITLISTED, i);
                 enrollmentRepo.save(updated);
             }

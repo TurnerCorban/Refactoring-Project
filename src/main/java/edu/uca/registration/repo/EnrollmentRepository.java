@@ -1,6 +1,6 @@
 package edu.uca.registration.repo;
 
-import edu.uca.registration.model.Enrollment;
+import edu.uca.registration.records.Enrollment;
 import java.util.List;
 
 public interface EnrollmentRepository {
@@ -9,6 +9,6 @@ public interface EnrollmentRepository {
     List<Enrollment> findWaitlistedByCourse(String courseCode);
     Enrollment save(Enrollment enrollment);
     boolean delete(String studentId, String courseCode);
-    int countEnrolledInCourse(String coursesCode);
-    int countWaitlistedInCourse(String coursesCode);
+    int numEnrolledInCourse(String coursesCode);
+    int numWaitlistedInCourse(String coursesCode);
 }
