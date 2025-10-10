@@ -1,17 +1,17 @@
 {
   "students" : {
     "B001" : {
-      "id" : "B001",
+      "bannerId" : "B001",
       "name" : "Alice",
       "email" : "alice@uca.edu"
     },
     "B002" : {
-      "id" : "B002",
+      "bannerId" : "B002",
       "name" : "Brian",
       "email" : "brian@uca.edu"
     },
     "B003" : {
-      "id" : "B003",
+      "bannerId" : "B003",
       "name" : "Jared",
       "email" : "jared@uca.edu"
     }
