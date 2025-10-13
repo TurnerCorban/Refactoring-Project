@@ -1,4 +1,4 @@
-package edu.uca.registration.records;
+package edu.uca.registration.model;
 
 import java.util.ArrayList;
 import java.util.List;

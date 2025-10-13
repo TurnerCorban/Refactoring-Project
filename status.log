@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2025-10-13T02:27:25.215773700Z</date>
+  <millis>1760322445215</millis>
+  <nanos>773700</nanos>
+  <sequence>0</sequence>
+  <logger>edu.uca.registration.app.RegistrationApp</logger>
+  <level>INFO</level>
+  <class>edu.uca.registration.app.RegistrationApp</class>
+  <method>run</method>
+  <thread>3</thread>
+  <message>2025-10-13T02:27:25.214772600 - UCA Course Registration (Refactored) started</message>
+</record>
+<record>
+  <date>2025-10-13T02:27:25.222772500Z</date>
+  <millis>1760322445222</millis>
+  <nanos>772500</nanos>
+  <sequence>1</sequence>
+  <logger>edu.uca.registration.app.RegistrationApp</logger>
+  <level>INFO</level>
+  <class>edu.uca.registration.app.RegistrationApp</class>
+  <method>run</method>
+  <thread>3</thread>
+  <message>Using JSON data storage: src/main/java/edu/uca/registration/data/registration_data.json</message>
+</record>
+<record>
+  <date>2025-10-13T02:27:25.222772500Z</date>
+  <millis>1760322445222</millis>
+  <nanos>772500</nanos>
+  <sequence>2</sequence>
+  <logger>edu.uca.registration.app.RegistrationApp</logger>
+  <level>INFO</level>
+  <class>edu.uca.registration.app.RegistrationApp</class>
+  <method>run</method>
+  <thread>3</thread>
+  <message>Demo mode: Data has been seeded</message>
+</record>
+<record>
+  <date>2025-10-13T02:27:28.803416300Z</date>
+  <millis>1760322448803</millis>
+  <nanos>416300</nanos>
+  <sequence>3</sequence>
+  <logger>edu.uca.registration.app.RegistrationApp</logger>
+  <level>INFO</level>
+  <class>edu.uca.registration.app.RegistrationApp</class>
+  <method>menuLoop</method>
+  <thread>3</thread>
+  <message>Invalid choice entered</message>
+</record>
+<record>
+  <date>2025-10-13T02:27:29.708829900Z</date>
+  <millis>1760322449708</millis>
+  <nanos>829900</nanos>
+  <sequence>4</sequence>
+  <logger>edu.uca.registration.app.RegistrationApp</logger>
+  <level>INFO</level>
+  <class>edu.uca.registration.app.RegistrationApp</class>
+  <method>menuLoop</method>
+  <thread>3</thread>
+  <message>Invalid choice entered</message>
+</record>
+</log>

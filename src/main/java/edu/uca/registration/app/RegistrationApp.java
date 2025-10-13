@@ -1,11 +1,19 @@
 package edu.uca.registration.app;
 
-import edu.uca.registration.records.*;
+import edu.uca.registration.Main;
+import edu.uca.registration.model.*;
 import edu.uca.registration.service.RegistrationService;
 import edu.uca.registration.utility.Config;
 
+import java.io.IOException;
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.time.Clock.*;
+
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 /*
 UI Handler
@@ -14,23 +22,39 @@ UI Handler
 public class RegistrationApp {
     private final RegistrationService service;
     private final Scanner scanner;
-    private boolean demoMode;
+    private final boolean demoMode;
 
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegistrationApp.class.getName());
+    private static final FileHandler fh;
 
+    static {
+        try {
+            fh = new FileHandler("registration.log");
+            logger.addHandler(fh);
+            logger.setUseParentHandlers(false);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-    public RegistrationApp(RegistrationService service, boolean demoMode) {
+    public RegistrationApp(RegistrationService service, boolean demoMode) throws IOException {
         this.service = service;
         this.scanner = new Scanner(System.in);
         this.demoMode = demoMode;
     }
 
     public void run() {
+        LocalDateTime now = LocalDateTime.now(Clock.systemUTC());
         println("=== UCA Course Registration (Refactored) ===");
-        println("Using JSON data storage: " + Config.getDataFilePath());
+        logger.info(" - UCA Course Registration (Refactored) started");
+        logger.info("Using JSON data storage: " + Config.getDataFilePath());
 
         if (demoMode) {
+            println("Demo mode active");
             seedDemoData();
-            println("Demo mode: Data has been seeded");
+            logger.info("Demo mode: Data has been seeded");
         }
 
         menuLoop();
@@ -52,15 +76,15 @@ public class RegistrationApp {
 
             String choice = scanner.nextLine().trim();
             switch (choice) {
-                case "1": addStudentUI(); break;
-                case "2": addCourseUI(); break;
-                case "3": enrollUI(); break;
-                case "4": dropUI(); break;
-                case "5": listStudents(); break;
-                case "6": listCourses(); break;
-                case "7": searchStudentEnrollments(); break;
-                case "0": return;
-                default: println("Invalid choice"); break;
+                case "1": addStudentUI(); logger.info("Add student selected"); break;
+                case "2": addCourseUI(); logger.info("Add course selected"); break;
+                case "3": enrollUI(); logger.info("Enroll ui selected"); break;
+                case "4": dropUI(); logger.info("Drop ui selected"); break;
+                case "5": listStudents(); logger.info("List students selected"); break;
+                case "6": listCourses(); logger.info("List courses selected"); break;
+                case "7": searchStudentEnrollments(); logger.info("Search student enrollments selected"); break;
+                case "0": logger.info("Exit selected"); return;
+                default: println("Invalid choice"); logger.info("Invalid choice entered"); break;
             }
         }
     }
@@ -77,6 +101,7 @@ public class RegistrationApp {
             Student student = service.addStudent(id, name, email);
             println("Student added: " + student);
         } catch (Exception e) {
+            logger.info(e.getMessage());
             println("Error: " + e.getMessage());
         }
     }
@@ -92,7 +117,9 @@ public class RegistrationApp {
 
             Course course = service.addCourse(code, title, cap);
             println("Course added: " + course);
+            logger.info("Course added: " + course);
         } catch (Exception e) {
+            logger.info(e.getMessage());
             println("Error: " + e.getMessage());
         }
     }
@@ -109,6 +136,7 @@ public class RegistrationApp {
                     "enrolled" : "waitlisted (position: " + enrollment.waitlistPosition() + ")";
             println("Student " + status + " in course");
         } catch (Exception e) {
+            logger.info(e.getMessage());
             println("Error: " + e.getMessage());
         }
     }
@@ -123,6 +151,7 @@ public class RegistrationApp {
             service.dropStudent(sid, cc);
             println("Student dropped from course");
         } catch (Exception e) {
+            logger.info(e.getMessage());
             println("Error: " + e.getMessage());
         }
     }
@@ -152,6 +181,7 @@ public class RegistrationApp {
         List<Enrollment> enrollments = service.getStudentEnrollments(sid);
         println("Enrollments for student " + sid + ":");
         if (enrollments.isEmpty()) {
+            logger.info("No enrollments found for student " + sid);
             println(" - No enrollments found");
         } else {
             for (Enrollment e : enrollments) {
@@ -166,29 +196,34 @@ public class RegistrationApp {
         try {
             // Only add students if they don't exist
             if (!service.getStudentRepo().existsStudent("B001")) {
+                logger.info("Seeded student B001 Alice");
                 service.addStudent("B001", "Alice", "alice@uca.edu");
                 System.out.println("Added demo student: B001 Alice");
             }
 
             if (!service.getStudentRepo().existsStudent("B002")) {
+                logger.info("Seeded student B002 Brian");
                 service.addStudent("B002", "Brian", "brian@uca.edu");
                 System.out.println("Added demo student: B002 Brian");
             }
 
             // Only add courses if they don't exist
             if (!service.getCourseRepo().existsCourse("CSCI4490")) {
+                logger.info("Seeded course CSCI4490");
                 service.addCourse("CSCI4490", "Software Engineering", 2);
                 System.out.println("Added demo course: CSCI4490 Software Engineering");
             }
 
             if (!service.getCourseRepo().existsCourse("MATH1496")) {
+                logger.info("Seeded course MATH1496");
                 service.addCourse("MATH1496", "Calculus I", 50);
                 System.out.println("Added demo course: MATH1496 Calculus I");
             }
 
-            println("Demo data seeding completed");
+            logger.info("Demo data seeding completed");
         } catch (Exception e) {
             // If data already exists, we'll get exceptions - that's fine
+            logger.info(e.getMessage());
             println("Note: " + e.getMessage());
         }
     }

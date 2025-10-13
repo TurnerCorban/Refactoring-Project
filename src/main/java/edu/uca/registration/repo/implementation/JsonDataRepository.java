@@ -1,8 +1,8 @@
 package edu.uca.registration.repo.implementation;
 
-import edu.uca.registration.records.Course;
-import edu.uca.registration.records.Enrollment;
-import edu.uca.registration.records.Student;
+import edu.uca.registration.model.Course;
+import edu.uca.registration.model.Enrollment;
+import edu.uca.registration.model.Student;
 import edu.uca.registration.repo.StudentRepository;
 import edu.uca.registration.repo.CourseRepository;
 import edu.uca.registration.repo.EnrollmentRepository;

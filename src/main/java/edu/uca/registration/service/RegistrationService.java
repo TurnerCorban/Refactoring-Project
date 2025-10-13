@@ -1,6 +1,6 @@
 package edu.uca.registration.service;
 
-import edu.uca.registration.records.*;
+import edu.uca.registration.model.*;
 import edu.uca.registration.repo.StudentRepository;
 import edu.uca.registration.repo.CourseRepository;
 import edu.uca.registration.repo.EnrollmentRepository;

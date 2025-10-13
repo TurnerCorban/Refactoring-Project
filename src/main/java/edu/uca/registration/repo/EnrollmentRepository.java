@@ -1,6 +1,6 @@
 package edu.uca.registration.repo;
 
-import edu.uca.registration.records.Enrollment;
+import edu.uca.registration.model.Enrollment;
 import java.util.List;
 
 public interface EnrollmentRepository {

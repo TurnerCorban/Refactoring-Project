@@ -4,9 +4,11 @@ import edu.uca.registration.app.RegistrationApp;
 import edu.uca.registration.repo.implementation.JsonDataRepository;
 import edu.uca.registration.service.RegistrationService;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
-        // Check for --demo flag in command line arguments
+    public static void main(String[] args) throws IOException {
+        // Check for a --demo flag in command line arguments
         boolean demoMode = false;
         for (String arg : args) {
             if ("--demo".equals(arg)) {
