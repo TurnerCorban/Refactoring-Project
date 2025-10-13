@@ -27,7 +27,7 @@ public class JsonDataRepository implements StudentRepository, CourseRepository, 
         this.filePath = Config.getDataFilePath();
         this.mapper = new ObjectMapper();
         loadFromFile();
-        importCsvOnce(); // Check if we need to migrate from old CSV format
+        importCsvOnce(); // Check if we need to migrate from the old CSV format
     }
 
     // Helper method for enrollment keys

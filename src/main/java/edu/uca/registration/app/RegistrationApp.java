@@ -5,10 +5,8 @@ import edu.uca.registration.model.*;
 import edu.uca.registration.service.RegistrationService;
 import edu.uca.registration.utility.Config;
 
+import java.io.File;
 import java.io.IOException;
-import java.time.Clock;
-import java.time.LocalDateTime;
-import java.time.Clock.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -46,7 +44,6 @@ public class RegistrationApp {
     }
 
     public void run() {
-        LocalDateTime now = LocalDateTime.now(Clock.systemUTC());
         println("=== UCA Course Registration (Refactored) ===");
         logger.info(" - UCA Course Registration (Refactored) started");
         logger.info("Using JSON data storage: " + Config.getDataFilePath());
@@ -194,6 +191,12 @@ public class RegistrationApp {
 
     private void seedDemoData() {
         try {
+            File d = new File("data/registration_data.json");
+            if(d.exists()) {
+                if(d.delete()){
+                    logger.info("Deleted registration data file: " + d.getAbsolutePath());
+                }
+            }
             // Only add students if they don't exist
             if (!service.getStudentRepo().existsStudent("B001")) {
                 logger.info("Seeded student B001 Alice");

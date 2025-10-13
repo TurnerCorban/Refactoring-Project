@@ -3,9 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.uca</groupId>
-  <artifactId>course-registration</artifactId>
+  <artifactId>Refactoring-Project</artifactId>
   <version>0.1.0</version>
   <name>UCA Course Registration (Refactored)</name>
+
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
@@ -53,6 +54,15 @@
           </archive>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <mainClass>edu.uca.registration.Main</mainClass>
+        </configuration>
+      </plugin>
     </plugins>
+
   </build>
 </project>
