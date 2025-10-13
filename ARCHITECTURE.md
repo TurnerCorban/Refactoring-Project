@@ -9,16 +9,20 @@ functionality.
 ## Package Structure
 overall hierarchy: src -> main -> java -> edu.uca.registration
 1. *application*:
-    `edu.uca.registration` -> `app` -> `RegistrationApp` and `Main`
-2. *model*:
-    `edu.uca.registration` -> `model`-> `Enrollment`, `Course`, and `Student`
-3. *repositories*:
+    `edu.uca.registration` -> `app` -> `RegistrationApp` 
+2. *data*
+    `edu.uca.registration` -> `data` -> `registration_data.json`
+3. *records*:
+    `edu.uca.registration` -> `records`-> `Enrollment`, `Course`, and `Student`
+4. *repositories*:
     `edu.uca.registration` -> `repo` -> (`implementation` -> `JsonDataRepository`),
     `CourseRepository`, `EnrollmentRepository`, and `StudentRepository`
-4. *service*:
+5. *service*:
    `edu.uca.registration` -> `service` -> `RegistrationService`
-5. *utility*:
+6. *utility*:
     `edu.uca.registration` -> `utility` -> `Config` and `ValidationUtil`
+7. *Main*
+    `edu.uca.registration` -> `Main`
      
 
 
@@ -26,7 +30,7 @@ overall hierarchy: src -> main -> java -> edu.uca.registration
 
 ## Data Flow
 
-1. **User Input** → `RegistrationApp` (CLI) → `RegistrationService` (Business Logic)
+1. **User Input** → `Main` -> `RegistrationApp` (CLI) → `RegistrationService` (Business Logic)
 2. **Business Logic** → Repository Interfaces → `JsonDataRepository` (Persistence)
 3. **Persistence** → Single JSON file (`registration_data.json`)
 4. **Responses** flow back up the same chain
@@ -44,4 +48,4 @@ overall hierarchy: src -> main -> java -> edu.uca.registration
 - **Format**: JSON (single file for all data)
 - **File**: `registration_data.json`
 - **Migration**: Automatic CSV → JSON conversion on first run
-- **Error Handling**: Graceful handling of missing/corrupted files
+- **Error Handling**: Handling of missing/corrupted files
