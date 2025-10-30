@@ -14,6 +14,11 @@
       "bannerId" : "B003",
       "name" : "Jared",
       "email" : "jared@uca.edu"
+    },
+    "B004" : {
+      "bannerId" : "B004",
+      "name" : "Mia",
+      "email" : "mia@uca.edu"
     }
   },
   "courses" : {
@@ -36,6 +41,11 @@
       "code" : "CSCI4315",
       "title" : "OOP",
       "capacity" : 15
+    },
+    "CSCI3330" : {
+      "code" : "CSCI3330",
+      "title" : "Algorithms",
+      "capacity" : 30
     }
   },
   "enrollments" : {
