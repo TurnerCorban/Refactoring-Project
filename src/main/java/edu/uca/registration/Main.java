@@ -4,6 +4,7 @@ import edu.uca.registration.app.RegistrationApp;
 import edu.uca.registration.repo.implementation.JsonDataRepository;
 import edu.uca.registration.service.RegistrationService;
 
+
 import java.io.IOException;
 
 public class Main {

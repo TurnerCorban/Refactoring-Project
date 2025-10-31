@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RegistrationServiceTest {
+public class    RegistrationServiceTest {
     private RegistrationService service;
     private JsonDataRepository repo;
 

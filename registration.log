@@ -1,8 +1,4 @@
-Oct 12, 2025 9:46:37 PM edu.uca.registration.app.RegistrationApp run
+Oct 30, 2025 11:04:01 PM edu.uca.registration.app.RegistrationApp run
 INFO:  - UCA Course Registration (Refactored) started
-Oct 12, 2025 9:46:37 PM edu.uca.registration.app.RegistrationApp run
+Oct 30, 2025 11:04:01 PM edu.uca.registration.app.RegistrationApp run
 INFO: Using JSON data storage: src/main/java/edu/uca/registration/data/registration_data.json
-Oct 12, 2025 9:46:37 PM edu.uca.registration.app.RegistrationApp seedDemoData
-INFO: Demo data seeding completed
-Oct 12, 2025 9:46:37 PM edu.uca.registration.app.RegistrationApp run
-INFO: Demo mode: Data has been seeded

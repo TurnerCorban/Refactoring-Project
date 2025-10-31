@@ -60,7 +60,8 @@
         <configuration>
           <archive>
             <manifest>
-              <addClasspath>false</addClasspath>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>test.edu.uca.registration</classpathPrefix>
               <mainClass>edu.uca.registration.Main</mainClass>
             </manifest>
           </archive>
