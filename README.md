@@ -2,6 +2,8 @@
 
 Refactored code by Nate Hazeslip and Corban Turner
 
+To run tests, [click here](testing.md)
+
 ## Run
 ```bash
 
@@ -29,12 +31,5 @@ mvn exec:java
 ```bash
 
 mvn exec:java -Dexec.args="--demo"
-
-```
-
-## Execute tests
-```bash
-
-mvn test
 
 ```
