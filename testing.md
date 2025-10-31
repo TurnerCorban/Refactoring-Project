@@ -16,3 +16,8 @@
 mvn test
 
 ```
+
+### Or run each test by running the test class directly:
+[RegistrationSystemTest](src/test/java/edu/uca/registration/app/RegistrationSystemTest.java)
+<br/>[RegistrationServiceTest](src/test/java/edu/uca/registration/service/RegistrationServiceTest.java)
+<br/>[ValidateUtilTest](src/test/java/edu/uca/registration/utility/ValidationUtilTest.java)

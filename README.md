@@ -1,8 +1,9 @@
 # UCA Course Registration – Baseline (for Refactoring Assignment)
+## GitHub Link: https://github.com/TurnerCorban/Refactoring-Project
 
 Refactored code by Nate Hazeslip and Corban Turner
 
-To run tests, [click here](testing.md)
+## To run tests, [click here](testing.md)
 
 ## Run
 ```bash
