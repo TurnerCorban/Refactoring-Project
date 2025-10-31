@@ -1,0 +1,66 @@
+{
+  "students" : {
+    "B020" : {
+      "bannerId" : "B020",
+      "name" : "Full flow Test",
+      "email" : "fullflow@uca.edu"
+    },
+    "B010" : {
+      "bannerId" : "B010",
+      "name" : "Mark Twain",
+      "email" : "mark@uca.edu"
+    },
+    "B008" : {
+      "bannerId" : "B008",
+      "name" : "Jonny B",
+      "email" : "jonny@uca.edu"
+    },
+    "B009" : {
+      "bannerId" : "B009",
+      "name" : "Blane M",
+      "email" : "blane@uca.edu"
+    },
+    "B005" : {
+      "bannerId" : "B005",
+      "name" : "Test Student",
+      "email" : "test@uca.edu"
+    }
+  },
+  "courses" : {
+    "FLOW1001" : {
+      "code" : "FLOW1001",
+      "title" : "Full flow Course",
+      "capacity" : 5
+    },
+    "TEST1010" : {
+      "code" : "TEST1010",
+      "title" : "Test Course",
+      "capacity" : 2
+    },
+    "TEST1020" : {
+      "code" : "TEST1020",
+      "title" : "Small Course",
+      "capacity" : 1
+    }
+  },
+  "enrollments" : {
+    "B010:TEST1010" : {
+      "studentId" : "B010",
+      "courseCode" : "TEST1010",
+      "status" : "ENROLLED",
+      "waitlistPosition" : 0
+    },
+    "B008:TEST1020" : {
+      "studentId" : "B008",
+      "courseCode" : "TEST1020",
+      "status" : "ENROLLED",
+      "waitlistPosition" : 0
+    },
+    "B009:TEST1020" : {
+      "studentId" : "B009",
+      "courseCode" : "TEST1020",
+      "status" : "WAITLISTED",
+      "waitlistPosition" : 1
+    }
+  }
+}
